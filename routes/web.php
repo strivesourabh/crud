@@ -19,15 +19,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-<<<<<<< HEAD
 
-Route::view('login', 'login');
-Route::view('logout', 'logout');
+Route::view('login','login');
+Route::view('logout','logout');
 // Route::post('registration','registration');
 Route::get('registration', [RegistrationController::class, 'create']);
-Route::post('registeration', [RegistrationController::class, 'store'])->name('datastore');
-=======
-Auth::routes();
+Route::post('register', [RegistrationController::class, 'store'])->name('datastore');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
->>>>>>> ca0c492ec66acc94ed918af6dcb16b2e470d4df0
+

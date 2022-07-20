@@ -16,18 +16,17 @@ class RegistrationController extends Controller
     public function store(Request $request)
     {
 
-
         
-        $this->validate(request(), [
+        // $this->validate(request(), [
 
-            'name' => 'required',
-            'email' => 'required|email',
-            'password' => 'required',
-            'contact' => 'required',
-            'city' => 'required',
-            'country' => 'required'
+        //     'name' => 'required',
+        //     'email' => 'required|email',
+        //     'password' => 'required',
+        //     'contact' => 'required',
+        //     'city' => 'required',
+        //     'country' => 'required'
 
-        ]);
+        // ]);
 
         $data = array(
             'name'=>$request->post('name'),
@@ -38,11 +37,13 @@ class RegistrationController extends Controller
             'country'=>$request->post('country'),
     
           );
-        $user = Registration::create($data);
+        //   print_r($data);
+        //   die();
+
+        Registration::create($data);
    
 
-        auth()->login($user);
 
-        return redirect()->to('/register');
+        return back()->with('seces', 'added');
     }
 }

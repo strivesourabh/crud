@@ -28,7 +28,7 @@
         </div>
         <div class="mb-3">
             <label for="country" class="form-label">Country</label>
-            <input type="text" class="form-control" id="country" name="contry">
+            <input type="text" class="form-control" id="country" name="country">
         </div>
         
         <input type="submit" class="btn btn-primary" value="Submit">
