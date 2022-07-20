@@ -40,4 +40,5 @@ Route::post('register', [RegistrationController::class, 'store'])->name('datasto
 
 Route::get('home',[LoginController::class, 'index']);
 Route::get('view/{id}',[RegistrationController::class, 'show']);
-// Route::view('edit/{id}',[LoginController::class, 'index']);
+Route::get('edit/{id}',[RegistrationController::class, 'edit']);
+// Route::post('edit/{id}',[RegistrationController::class, 'update']);
