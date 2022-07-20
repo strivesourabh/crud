@@ -32,9 +32,9 @@ class RegistrationController extends Controller
             'name'=>$request->post('name'),
             'email'=>$request->post('email'),
             'password'=>Hash::make($request->post('password')),
-            'contact'=>$request->post('contact'),
-            'city'=>$request->post('city'),
-            'country'=>$request->post('country'),
+            // 'contact'=>$request->post('contact'),
+            // 'city'=>$request->post('city'),
+            // 'country'=>$request->post('country'),
     
           );
         //   print_r($data);
