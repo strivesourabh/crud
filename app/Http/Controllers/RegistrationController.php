@@ -13,32 +13,40 @@ class RegistrationController extends Controller
         return view('registration');
     }
 
+    public function show($id)  
+    {  
+        
+       
+        $cruds = Registration::where('id', $id)->get();
+    	return view('view',['cruds'=>$cruds]); 
+        
+    } 
+
     public function store(Request $request)
     {
 
         
-        // $this->validate(request(), [
+        $this->validate(request(), [
 
-        //     'name' => 'required',
-        //     'email' => 'required|email',
-        //     'password' => 'required',
-        //     'contact' => 'required',
-        //     'city' => 'required',
-        //     'country' => 'required'
+            'name' => 'required',
+            'email' => 'required|email',
+            'password' => 'required',
+            'contact' => 'required',
+            'city' => 'required',
+            'country' => 'required'
 
-        // ]);
+        ]);
 
         $data = array(
             'name'=>$request->post('name'),
             'email'=>$request->post('email'),
             'password'=>Hash::make($request->post('password')),
-            // 'contact'=>$request->post('contact'),
-            // 'city'=>$request->post('city'),
-            // 'country'=>$request->post('country'),
+            'contact'=>$request->post('contact'),
+            'city'=>$request->post('city'),
+            'country'=>$request->post('country'),
     
           );
-        //   print_r($data);
-        //   die();
+       
 
         Registration::create($data);
    

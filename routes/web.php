@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\RegistrationController;
+use App\Http\Controllers\Auth\LoginController;  
 
 /*
 |--------------------------------------------------------------------------
@@ -20,10 +21,23 @@ Route::get('/', function () {
 });
 
 
-Route::view('login','login');
-Route::view('logout','logout');
-// Route::post('registration','registration');
+route::get('/logout',function(){
+    if(session()->has('name')){
+        session()->pull('name',null);
+    }
+    return redirect('login');
+});
+
+route::get('login',function(){
+    if(session()->has('name')){
+        return redirect('home');
+    }
+    return view('login');
+});
+
 Route::get('registration', [RegistrationController::class, 'create']);
 Route::post('register', [RegistrationController::class, 'store'])->name('datastore');
 
-
+Route::get('home',[LoginController::class, 'index']);
+Route::get('view/{id}',[RegistrationController::class, 'show']);
+// Route::view('edit/{id}',[LoginController::class, 'index']);

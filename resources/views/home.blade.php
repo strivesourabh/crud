@@ -1,23 +1,30 @@
 @extends('layouts.app')
-
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+    
+<h1>You can not access our web</h1>
+            <table class="border">
+                <tr>
+                <td>name</td>
+                <td>email</td>
+                <td>contact</td>
+                <td>city</td>
+                <td>country</td>
+                    <td>Action</td>
+                </tr>
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+                @foreach ($cruds as $user)
+                <tr>
+                <td>{{ $user->name }}</td>
+                
+                <td>{{ $user->email }}</td>
+                <td>{{ $user->contact }}</td>
+                <td>{{ $user->city }}</td>
+                <td>{{ $user->country }}</td>
+                <td><a href="view/{{ $user->id }}">View</a> <a href="edit/{{ $user->id }}">Edit</a> <a href="#">Delete</a></td>
+                </tr>
+            @endforeach
+            </table>  
 
-                    {{ __('You are logged in!') }}
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
 @endsection
+ 
