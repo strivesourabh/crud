@@ -18,7 +18,7 @@ class RegistrationController extends Controller
         
        
         $cruds = Registration::where('id', $id)->get();
-    	return view('view',['cruds'=>$cruds]); 
+    	return view('view',compact('cruds')); 
         
     } 
     public function edit($id)  
@@ -26,21 +26,21 @@ class RegistrationController extends Controller
         
        
         $cruds = Registration::where('id', $id)->get();
-    	return view('edit',['cruds'=>$cruds]); 
+    	return view('edit',compact('cruds')); 
         
     } 
     public function update(Request $request, $id)  
     {  
         
-       
-        $cruds = Registration::where('id', $id)->get();
+        $imageName = time().'.'.$request->file->extension(); 
         $this->validate(request(), [
 
             'name' => 'required',
             'email' => 'required|email',
             'contact' => 'required',
             'city' => 'required',
-            'country' => 'required'
+            'country' => 'required',
+            
 
         ]);
 
@@ -50,32 +50,22 @@ class RegistrationController extends Controller
             'contact'=>$request->post('contact'),
             'city'=>$request->post('city'),
             'country'=>$request->post('country'),
+            'filename'=>$imageName,
     
           );
-       
 
-        Registration::create($data);
-    	return view('home','home'); 
-        
+          $request->file->move(public_path('upload'), $imageName);
+        Registration::where('id', $id)->update($data);
+        return redirect('home')->with('success','Data Update successfully.');
+    	
     } 
 
   
 
     public function store(Request $request)
     {
-
         
-        $this->validate(request(), [
-
-            'name' => 'required',
-            'email' => 'required|email',
-            'password' => 'required',
-            'contact' => 'required',
-            'city' => 'required',
-            'country' => 'required'
-
-        ]);
-
+        $imageName = time().'.'.$request->file->extension(); 
         $data = array(
             'name'=>$request->post('name'),
             'email'=>$request->post('email'),
@@ -83,14 +73,25 @@ class RegistrationController extends Controller
             'contact'=>$request->post('contact'),
             'city'=>$request->post('city'),
             'country'=>$request->post('country'),
+            'filename'=>$imageName,
     
           );
        
+      
 
+         $request->file->move(public_path('upload'), $imageName);
+          
         Registration::create($data);
    
 
 
-        return back()->with('seces', 'added');
+        return back()->with('success', 'added');
+    }
+
+    public function delete($id){
+        echo "<script>alert('Confirm To Delete')</script>";
+        Registration::where('id', $id)->delete();
+        return redirect('home')->with('success','Data deleted successfully');
+
     }
 }

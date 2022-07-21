@@ -20,7 +20,7 @@
                 <td>{{ $user->contact }}</td>
                 <td>{{ $user->city }}</td>
                 <td>{{ $user->country }}</td>
-                <td><a href="view/{{ $user->id }}">View</a> <a href="edit/{{ $user->id }}">Edit</a> <a href="#">Delete</a></td>
+                <td><a href="view/{{ $user->id }}">View</a> <a href="edit/{{ $user->id }}">Edit</a> <a href="delete/{{ $user->id }}">Delete</a></td>
                 </tr>
             @endforeach
             </table>  
