@@ -1,4 +1,4 @@
-@extends('welcome')
+@extends('layouts.app')
 @section('content')
 <div class="container-fluid my-5 w-25">
     <h2 class="text-center">Login</h2>

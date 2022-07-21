@@ -1,9 +1,9 @@
-@extends('welcome')
+@extends('layouts.app')
 @section('content')
 
 <div class="container my-5">
     <h1>Registration Page</h1>
-    <form class="w-25" action="{{route('datastore')}}" method="post">
+    <form class="w-25" action="{{route('datastore')}}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
             <label for="name" class="form-label">Name</label>
@@ -30,6 +30,10 @@
             <label for="country" class="form-label">Country</label>
             <input type="text" class="form-control" id="country" name="country">
         </div>
+        <div class="mb-3">
+          <label for="file" class="form-label">Image</label>
+          <input type="file" class="form-control" id="file" name="file">
+      </div>
         
         <input type="submit" class="btn btn-primary" value="Submit">
         <a href="login">Login</a>
