@@ -1,9 +1,9 @@
 @extends('layouts.app')
 @section('content')
     
-<div>
+<div class="mx-auto">
     <a class="btn btn-primary text-right" href="/registration">Add User</a>
-</div>
+
 
             <table class="border data-table text-center">
                 <tr>
@@ -18,9 +18,9 @@
 
                 @foreach ($cruds as $user)
                 <tr>
-                <td>{{ $user->name }}</td>
+                <td name="name">{{ $user->name }}</td>
                 
-                <td>{{ $user->email }}</td>
+                <td name="email">{{ $user->email }}</td>
                 <td>{{ $user->contact }}</td>
                 <td>{{ $user->city }}</td>
                 <td>{{ $user->country }}</td>
@@ -31,7 +31,7 @@
                 </tr>
             @endforeach
             </table>  
-
+        </div>
             <script type="text/javascript">
                 $(function () {
                   
@@ -40,7 +40,7 @@
                       serverSide: true,
                       ajax: "{{ 'home' }}",
                       columns: [
-                          {data: 'id', name: 'id'},
+                        
                           {data: 'name', name: 'name'},
                           {data: 'email', name: 'email'},
                           {data: 'action', name: 'action', orderable: false, searchable: false},

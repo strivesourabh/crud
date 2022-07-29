@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\Registration;
 use Illuminate\Database\DBAL\TimestampType;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class RegistrationController extends Controller
 {
@@ -15,8 +17,6 @@ class RegistrationController extends Controller
 
     public function show($id)  
     {  
-        
-       
         $cruds = Registration::where('id', $id)->get();
     	return view('view',compact('cruds')); 
         
@@ -74,7 +74,6 @@ class RegistrationController extends Controller
             'city'=>$request->post('city'),
             'country'=>$request->post('country'),
             'filename'=>$imageName,
-    
           );
        
       
@@ -92,6 +91,30 @@ class RegistrationController extends Controller
         echo "<script>alert('Confirm To Delete')</script>";
         Registration::where('id', $id)->delete();
         return redirect('home')->with('success','Data deleted successfully');
+    }
+    // function login(Request $req){
+    //     $data = $req->input('name');
+    //     $req =session()->put('name',$data);
+    //     return redirect('home');
+    // }
+    public function login(Request $request)
+    {
+        
+        request()->validate([
+        'email' => 'required',
+        'password' => 'required',
+        ]);
 
+        $data = array(
+            'email'=>$request->post('email'),
+            'password'=>$request->post('password'),
+        );
+     
+
+        if (Auth::attempt($data)) {
+            
+            return redirect('home');
+        }
+        return Redirect::to("login")->withSuccess('Oppes! You have entered invalid credentials');
     }
 }

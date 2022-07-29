@@ -26,7 +26,7 @@ route::get('/logout',function(){
         session()->pull('name',null);
     }
     return redirect('login');
-});
+})->name('logout');
 
 route::get('login',function(){
     if(session()->has('name')){
@@ -34,6 +34,8 @@ route::get('login',function(){
     }
     return view('login');
 });
+
+route::post('login',[RegistrationController::class,'login'])->name('login');
 
 Route::get('registration', [RegistrationController::class, 'create']);
 Route::post('register', [RegistrationController::class, 'store'])->name('datastore');
